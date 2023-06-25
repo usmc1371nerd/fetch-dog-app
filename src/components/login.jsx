@@ -1,6 +1,7 @@
 import React from 'react'
 import './login.css'
-import Header from '../header'
+import Header from './header'
+
 
 const Login = () => {
   return (
@@ -9,6 +10,7 @@ const Login = () => {
       <div className="login-input">
       <input type="text" placeholder='name'></input>
       <input type="text" placeholder='email'/>
+      <button type="submit">Log-in</button>
       </div>
     </div>
   )
