@@ -1,23 +1,38 @@
 
 // example I found using gpt will need to change it to fit the UI I want
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import DogSelection from './dogselection';
-import DogSearch from './zipcodeselctor';
+import ZipCodeSelector from './zipcodeselctor';
 
 
 const Search = () => {
+  const [dogBreed, setDogBreed] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const email = useState('');
+  const name = useState('');
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    
+    // Perform the search using dogBreed and zipCode values
+    console.log('Performing search with dogBreed:', dogBreed, 'and zipCode:', zipCode);
+    // ... your search logic here
+  };
+
   return (
     <div>
-
-    <DogSelection/>
-    <DogSearch/>
-    
+      <form onSubmit={handleSearchSubmit}>
+        <ZipCodeSelector onSelectBreed={setZipCode} />
+        <DogSelection email={email} name={name} onSelectBreed={setDogBreed} />
+        <button type="submit">Search</button>
+      </form>
     </div>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;
+
 
 // const Search = () => {
 //   const [currentPage, setCurrentPage] = useState(1);

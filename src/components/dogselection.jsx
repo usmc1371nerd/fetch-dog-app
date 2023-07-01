@@ -1,144 +1,152 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
-const DogSelection = () => {
 
-    //lets get this from the endpoint and then add it the zipcode selctor renanme it.. 
-    //rename to dogsearh.jsx.. pass it into search..
-  const dogBreeds = [
-    "Affenpinscher",
-    "Afghan Hound",
-    "African Hunting Dog",
-    "Airedale",
-    "American Staffordshire Terrier",
-    "Appenzeller",
-    "Australian Terrier",
-    "Basenji",
-    "Basset",
-    "Beagle",
-    "Bedlington Terrier",
-    "Bernese Mountain Dog",
-    "Black-and-tan Coonhound",
-    "Blenheim Spaniel",
-    "Bloodhound",
-    "Bluetick",
-    "Border Collie",
-    "Border Terrier",
-    "Borzoi",
-    "Boston Bull",
-    "Bouvier Des Flandres",
-    "Boxer",
-    "Brabancon Griffon",
-    "Briard",
-    "Brittany Spaniel",
-    "Bull Mastiff",
-    "Cairn",
-    "Cardigan",
-    "Chesapeake Bay Retriever",
-    "Chihuahua",
-    "Chow",
-    "Clumber",
-    "Cocker Spaniel",
-    "Collie",
-    "Curly-coated Retriever",
-    "Dandie Dinmont",
-    "Dhole",
-    "Dingo",
-    "Doberman",
-    "English Foxhound",
-    "English Setter",
-    "English Springer",
-    "EntleBucher",
-    "Eskimo Dog",
-    "Flat-coated Retriever",
-    "French Bulldog",
-    "German Shepherd",
-    "German Short-haired Pointer",
-    "Giant Schnauzer",
-    "Golden Retriever",
-    "Gordon Setter",
-    "Great Dane",
-    "Great Pyrenees",
-    "Greater Swiss Mountain Dog",
-    "Groenendael",
-    "Ibizan Hound",
-    "Irish Setter",
-    "Irish Terrier",
-    "Irish Water Spaniel",
-    "Irish Wolfhound",
-    "Italian Greyhound",
-    "Japanese Spaniel",
-    "Keeshond",
-    "Kelpie",
-    "Kerry Blue Terrier",
-    "Komondor",
-    "Kuvasz",
-    "Labrador Retriever",
-    "Lakeland Terrier",
-    "Leonberg",
-    "Lhasa",
-    "Malamute",
-    "Malinois",
-    "Maltese Dog",
-    "Mexican Hairless",
-    "Miniature Pinscher",
-    "Miniature Poodle",
-    "Miniature Schnauzer",
-    "Newfoundland",
-    "Norfolk Terrier",
-    "Norwegian Elkhound",
-    "Norwich Terrier",
-    "Old English Sheepdog",
-    "Otterhound",
-    "Papillon",
-    "Pekinese",
-    "Pembroke",
-    "Pomeranian",
-    "Pug",
-    "Redbone",
-    "Rhodesian Ridgeback",
-    "Rottweiler",
-    "Saint Bernard",
-    "Saluki",
-    "Samoyed",
-    "Schipperke",
-    "Scotch Terrier",
-    "Scottish Deerhound",
-    "Sealyham Terrier",
-    "Shetland Sheepdog",
-    "Shih-Tzu",
-    "Siberian Husky",
-    "Silky Terrier",
-    "Soft-coated Wheaten Terrier",
-    "Staffordshire Bullterrier",
-    "Standard Poodle",
-    "Standard Schnauzer",
-    "Sussex Spaniel",
-    "Tibetan Mastiff",
-    "Tibetan Terrier",
-    "Toy Poodle",
-    "Toy Terrier",
-    "Vizsla",
-    "Walker Hound",
-    "Weimaraner",
-    "Welsh Springer Spaniel",
-    "West Highland White Terrier",
-    "Whippet",
-    "Wire-haired Fox Terrier",
-    "Yorkshire Terrier"
-  ];
+ 
+// const DogSelection = () => {
+//   const [dogBreeds, setDogBreeds] = useState([]);
+//   const { email, name, cookies } = useParams();
+//   // const navigate = useNavigate()
+  
+//   console.log( email,name, cookies)
+//   useEffect(() => {
+//     loginAndFetchDogBreeds();
+//   },[email, name, cookies] );
 
+
+//   const loginAndFetchDogBreeds = async () => {
+//     try {
+//       const loginResponse = await fetch('https://frontend-take-home-service.fetch.com/auth/login', {
+//         method: 'POST',
+//         headers: {
+//           'Content-Type': 'application/json',
+//         },
+//         body: JSON.stringify({ email, name, cookies }),
+//         credentials: 'include',
+//       });
+
+//       if (loginResponse.ok) {
+//         // Login successful, fetch dog breeds
+//         const dogBreedsResponse = await fetch('https://frontend-take-home-service.fetch.com/dogs/breeds', {
+//           method: 'GET',
+//           credentials: 'include',
+//         },
+//         console.log(dogBreedsResponse)
+//         );
+
+//         if (dogBreedsResponse.ok) {
+//           const breeds = await dogBreedsResponse.json();
+//           setDogBreeds(breeds);
+          
+//         } else {
+//           console.log('Error fetching dog breeds');
+//         }
+//       } else {
+//         console.log('Login failed');
+//       }
+//     } catch (error) {
+//       console.log('Error logging in and fetching dog breeds:', error);
+//     }
+  
+//   };
+  
+ 
+//   return (
+//     <div>
+//       <div>Hi {name}</div>
+//       <label htmlFor="dogSelect">Select a dog breed:</label>
+//       <select id="dogSelect">
+//         {dogBreeds.map((breed, index) => (
+//           <option key={index} value={breed}>
+//             {breed}
+//           </option>
+//         ))}
+//       </select>
+//     </div>
+//   );
+// };
+
+
+
+
+  const DogSelection = () => {
+
+    const [dogBreeds, setDogBreeds] = useState([]);
+    const { email, name } = useParams();
+    // const navigate = useNavigate();
+
+    useEffect(() => {
+      loginAndFetchDogBreeds();
+    }, [email, name]);
+  
+    const loginAndFetchDogBreeds = async () => {
+      try {
+        const loginPayLoad = JSON.stringify({email, name});
+        console.log(loginPayLoad);
+
+        const loginResponse = await fetch('https://frontend-take-home-service.fetch.com/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: loginPayLoad,
+          credentials: 'include',
+        });
+  
+        if (loginResponse.ok) {
+          console.log('Login successful')
+          console.log(email, name)
+          const dogBreedsResponse = await fetch('https://frontend-take-home-service.fetch.com/dogs/breeds', {
+            method: 'GET',
+            credentials: 'include',
+          });
+  
+          if (dogBreedsResponse.ok) {
+            const breeds = await dogBreedsResponse.json();
+            setDogBreeds(breeds);
+          } else {
+            console.log('Error fetching dog breeds');
+          }
+        } else {
+          const errorText = await loginResponse.text();
+          console.log('Login failed', errorText);
+        }
+      } catch (error) {
+        console.log('Error logging in and fetching dog breeds:', error);
+      }
+    };
+  
   return (
+    
+    <div>
+
+
+
+
+ 
+
     <div>
       <label htmlFor="dogSelect">Select a dog breed:</label>
       <select id="dogSelect">
         {dogBreeds.map((breed, index) => (
-          <option key={index} value={breed}>{breed}</option>
+          <option key={index} value={breed}>
+            {breed}
+          </option>
         ))}
       </select>
     </div>
-  );
-};
+  
+
+
+
+
+
+    </div>
+  )
+}
+
+
 
 export default DogSelection;
-
 

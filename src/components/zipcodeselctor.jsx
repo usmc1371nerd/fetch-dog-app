@@ -1,17 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 const DogSearch = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [distance, setDistance] = useState(0);
   const [results, setResults] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    fetchData();
+    // Check if the user is already logged in (e.g., by checking the existence of a cookie)
+    const userIsLoggedIn = checkUserLoggedIn();
+    setIsLoggedIn(userIsLoggedIn);
+    console.log(userIsLoggedIn)
   }, []);
+
+  const checkUserLoggedIn = () => {
+    // Implement the logic to check if the user is logged in (e.g., by checking the existence of a cookie)
+    // Return true if the user is logged in, false otherwise
+    // You can use a library like js-cookie to handle cookies
+    // Example:
+    // return Cookies.get('authToken') !== undefined;
+    // Replace the example implementation with your actual authentication logic
+    return false;
+  };
+
+  useEffect(() => {
+    if (isLoggedIn) {
+      fetchData();
+    }
+  }, [isLoggedIn]);
 
   const fetchData = async () => {
     try {
+      // Set the authentication token in the request headers
+      const authToken = 'your_auth_token';
+      axios.defaults.headers.common['Authorization'] = `Bearer ${authToken}`;
+
       const response = await axios.post('https://frontend-take-home-service.fetch.com/locations/search');
       setResults(response.data);
     } catch (error) {

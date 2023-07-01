@@ -22,14 +22,17 @@ const Login = () => {
       });
 
       if (response.ok) {
-      
+      console.log('login successful')
+     
+      console.log(email, name)
         
-         navigate('/search'); // Redirect to the search page
+        // navigate('/search'); // if log-in is good it will redirect to the search page
+        navigate(`/search/${email}/${name}`);
+
       } else {
         
         console.log('login failed')
-        // Login failed
-        // Handle error or display error message
+       
       }
     } catch (error) {
       // Handle network error
@@ -53,14 +56,16 @@ const Login = () => {
           if (fetchAccessTokenCookie) {
             const [, cookieValue] = fetchAccessTokenCookie.split('=');
             // Set the cookie value to "Cookie" header for subsequent requests
-            document.cookie = `fetch-access-token=${cookieValue}`;
+            document.cookie = `fetch-access-token=${cookieValue}; SameSite=None; Secure`;
           }
         }
       } else {
-        // Handle error or display error message
+
+      console.log("Cookie error")
+        
       }
     } catch (error) {
-      // Handle network error
+     console.log("there is a  problem")
     }
   };
 
