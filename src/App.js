@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import Login from './components/login';
 import SearchPage from './components/search';
 import Home from './components/home';

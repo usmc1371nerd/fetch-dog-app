@@ -1,0 +1,11 @@
+.displayedResults {
+display: flex;
+align-items: center;
+
+
+}
+
+.displayedResults div{
+border: 1px solid green;
+margin: 5px;
+}
