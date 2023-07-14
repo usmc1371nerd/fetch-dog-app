@@ -5,6 +5,19 @@
     border: 2px solid whitesmoke;
 }
 
+.home .title {
+
+ 
+}
 body {
-    background-color: blue;
+    background-color: cornflowerblue;
+    background-image:  url(../images/happy-owner-dog.jpg);
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+}
+
+img {
+    opacity: 50%;
 }

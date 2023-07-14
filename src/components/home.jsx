@@ -1,6 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import './home.css'
+import HappyDogOwner from '../images/happy-owner-dog.jpg'
 
 const Home = () => {
   return (
@@ -13,7 +14,6 @@ const Home = () => {
 
     </div>
 
-   
 
 
     </div>

@@ -12,6 +12,9 @@ const DogSearch = () => {
   const [dogBreeds, setDogBreeds] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [resultsPerPage, setResultsPerPage] = useState(25);
+  const [favoriteDogs, setFavoriteDogs] = useState([]);
+  const [matchDog, setMatchDog] = useState(null);
+  const [sortOrder, setSortOrder] = useState('asc');
 
 
   const { email, name } = useParams();
@@ -112,6 +115,19 @@ const DogSearch = () => {
     setFilteredResults(filteredResults);
   }, [searchResults, searchQuery]);
 
+  useEffect(() => {
+    let sortedResults = [...displayedResults];
+    sortedResults.sort((a, b) => {
+      if (sortOrder === 'asc') {
+        return a[0].localeCompare(b[0]);
+      } else {
+        return b[0].localeCompare(a[0]);
+      }
+    });
+    setDisplayedResults(sortedResults);
+  }, [sortOrder]);
+
+
   const handleLocationChange = (event) => {
     setSelectedLocation(event.target.value);
   };
@@ -167,6 +183,8 @@ const DogSearch = () => {
 
       setDisplayedResults([dogInfo, dogName, dogAge, dogLocation]);
     }
+    setFavoriteDogs([]);
+    setMatchDog(null);
   };
 
   const generateRandomName = () => {
@@ -200,10 +218,45 @@ const DogSearch = () => {
       setCurrentPage(currentPage + 1);
     }
   };
+  const generateUniqueId = () => {
+    return Math.random().toString(36).substr(2, 9);
+  };
+  const handleFavoriteDogToggle = (index) => {
+    const dog = displayedResults[index];
+    const updatedFavorites = [...favoriteDogs];
+    const dogIndex = updatedFavorites.findIndex((favoriteDog) => favoriteDog.id === dog.id);
+  
+    if (dogIndex !== -1) {
+      // Dog is already in favorites, remove it
+      updatedFavorites.splice(dogIndex, 1);
+    } else {
+      // Dog is not in favorites, add it
+      updatedFavorites.push({ ...dog, id: generateUniqueId() });
+    }
+  
+    setFavoriteDogs(updatedFavorites);
+  };
+
+  
+  const handleGenerateMatch = () => {
+    if (favoriteDogs.length > 0) {
+      const randomIndex = Math.floor(Math.random() * favoriteDogs.length);
+      const match = favoriteDogs[randomIndex];
+      setMatchDog(match);
+    } else {
+      setMatchDog(null);
+    }
+    console.log(favoriteDogs);
+  };
+
+  const handleSortOrderChange = (event) => {
+    setSortOrder(event.target.value);
+  };
 
   return (
     <div>
-      <label htmlFor="locationSelect">Select location:</label>
+      <div className='select-location'>
+      <label  htmlFor="locationSelect">Select location:</label>
       <select id="locationSelect" value={selectedLocation} onChange={handleLocationChange}>
         <option value="">Please select a location</option>
         {filteredResults.map((result, index) => (
@@ -211,24 +264,62 @@ const DogSearch = () => {
             {result.city}
           </option>
         ))}
+         
       </select>
+  
+      </div>
       <div>{selectedLocation}</div>
-      <DogSelection onDogBreedsUpdate={handleDogBreedsUpdate} dogBreeds={dogBreeds} />
-      <button type="button" onClick={handleSearchSubmit}>Submit</button>
       
-      <div className='displayedResults'>
-        {currentResults.map((result, index) => (
-          <div key={index}> 
+      <DogSelection onDogBreedsUpdate={handleDogBreedsUpdate} dogBreeds={dogBreeds} />
+      <button className='match-submit' type="button" onClick={handleSearchSubmit}>Submit</button>
 
-          <div className="dogInfo">{result[0]}</div>
+
+     
+      <div className='sort-order'>
+      <label className='sort-order' htmlFor="sortOrderSelect">Sort Order:</label>
+      <select id="sortOrderSelect" value={sortOrder} onChange={handleSortOrderChange}>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+      </div>
+      <div className="displayedResults">
+        {currentResults.map((result, index) => (
+          <div key={index} className={`dogResult ${favoriteDogs.includes(result) ? 'favorite' : ''}`}>
+           <div className="dogInfo">{result[0]}</div>
           <div className="dogName">{result[1]}</div>
           <div className="dogLocation">{result[2]}</div>
           <div className="dogAge">{result[3]}</div>
-
+            <button 
+              type="button"
+              onClick={() => handleFavoriteDogToggle(index)}
+              className={`favoriteButton ${favoriteDogs.includes(result) ? 'active' : ''}`}
+            >
+              Favorite
+            </button>
           </div>
-
         ))}
       </div>
+
+      <button className='generate-button' type="button" onClick={handleGenerateMatch}>
+        Generate Match
+      </button>
+
+      <div className="favorites">
+      </div>
+
+{matchDog && (
+  <div className="matchDog">
+    <h3>Your Match!!</h3>
+    <div className="dogResult">
+      <div className="dogInfo">{matchDog[0]}</div>
+      <div className="dogName">{matchDog[1]}</div>
+      <div className="dogAge">{matchDog[2]}</div>
+      <div className="dogLocation">{matchDog[3]}</div>
+   
+    </div>
+  </div>
+)}
+ 
       <div className='pagination'>
         <button type="button" onClick={handlePreviousPage} disabled={currentPage === 1}>
           Previous

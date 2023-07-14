@@ -53,7 +53,8 @@ const DogSelection = ({onDogBreedsUpdate}) => {
 
   return (
     <div>
-      <label htmlFor="dogSelect">Select a dog breed:</label>
+      <div className='select-dogbreed'>
+      <label  htmlFor="dogSelect">Select a dog breed:</label>
       <select id="dogSelect" value={selectedBreed} onChange={handleBreedSelect}>
   <option value="">Select Breed</option>
   {dogBreeds.map((breed, index) => (
@@ -62,6 +63,7 @@ const DogSelection = ({onDogBreedsUpdate}) => {
     </option>
   ))}
 </select>
+</div>
       <div> {selectedBreed}</div>
     </div>
   );

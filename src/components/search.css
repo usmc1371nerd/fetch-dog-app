@@ -1,5 +1,7 @@
+
+/* -----------------displayed results----------------- */
+
 .displayedResults {
-border: 2px solid green;
 display: grid;
 grid-template-columns: auto auto auto;
 
@@ -17,3 +19,54 @@ padding: 15px;
 
 
 }
+
+
+
+
+
+/* -----------------match results----------------- */
+
+.matchDog {
+    background-color: orange;
+    width: fit-content;
+    padding: 15px;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+
+
+
+
+
+
+/*----------------- selectors and sort----------------- */
+.select-location {
+    margin-bottom: 15px;
+   
+}
+
+.select-dogbreed {
+    margin-bottom: 15px;
+}
+
+.sort-order {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+
+/* -----------------buttons----------------- */
+
+.generate-button{
+    margin-top: 15px;
+    margin-bottom:15px;
+}
+
+.favoriteButton{
+    margin-top: 5px;
+    margin-left: 5px ;
+}
+
+/* ----------------- Page navigation  ----------------- */
+
