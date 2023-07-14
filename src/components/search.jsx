@@ -182,6 +182,7 @@ const DogSearch = () => {
     const maxAge = 10;
     return Math.floor(Math.random() * (maxAge - minAge + 1) + minAge);
   };
+  
   const indexOfLastResult = currentPage * resultsPerPage;
   const indexOfFirstResult = indexOfLastResult - resultsPerPage;
   const currentResults = displayedResults.slice(indexOfFirstResult, indexOfLastResult);
@@ -214,9 +215,18 @@ const DogSearch = () => {
       <div>{selectedLocation}</div>
       <DogSelection onDogBreedsUpdate={handleDogBreedsUpdate} dogBreeds={dogBreeds} />
       <button type="button" onClick={handleSearchSubmit}>Submit</button>
+      
       <div className='displayedResults'>
         {currentResults.map((result, index) => (
-          <div key={index}>{result}</div>
+          <div key={index}> 
+
+          <div className="dogInfo">{result[0]}</div>
+          <div className="dogName">{result[1]}</div>
+          <div className="dogLocation">{result[2]}</div>
+          <div className="dogAge">{result[3]}</div>
+
+          </div>
+
         ))}
       </div>
       <div className='pagination'>
