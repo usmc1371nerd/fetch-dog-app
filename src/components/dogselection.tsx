@@ -64,7 +64,7 @@ const DogSelection = ({onDogBreedsUpdate}) => {
   ))}
 </select>
 </div>
-      <div> {selectedBreed}</div>
+     
     </div>
   );
 };

@@ -1,72 +1,82 @@
-
-/* -----------------displayed results----------------- */
-
-.displayedResults {
-display: grid;
-grid-template-columns: auto auto auto;
-
-
-
-
-}
-
-.displayedResults div{
-border: 2px solid black;
-background-color: grey;
-font-weight: 600;
-margin: 5px;
-padding: 15px;
-
-
-}
-
-
-
-
-
-/* -----------------match results----------------- */
-
-.matchDog {
+.search {
+    background-color: azure;
+    opacity: 75%;
+    height: fit-content;
+    width: fit-content;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center horizontally */
+    margin: 0 auto; /* Center horizontally */
+    height: 100vh;
+  }
+  
+  /* -----------------displayed results----------------- */
+  .displayedResults {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    max-height: 80vh; /* Limit the maximum height of the displayed results */
+    overflow-y: auto; /* Add vertical scrollbar if content exceeds the height */
+  }
+  
+  .displayedResults div {
+    flex-basis: calc(33.33% - 10px);
+    border: 2px solid black;
+    background-color: grey;
+    font-weight: 600;
+    padding: 15px;
+    margin: 5px;
+  }
+  /* -----------------match results----------------- */
+  
+  .matchDog {
     background-color: orange;
     width: fit-content;
     padding: 15px;
     margin-bottom: 50px;
     margin-top: 50px;
-}
-
-
-
-
-
-
-/*----------------- selectors and sort----------------- */
-.select-location {
+  }
+  
+  /* -----------------selectors and sort----------------- */
+  
+  .select-location {
     margin-bottom: 15px;
-   
-}
-
-.select-dogbreed {
+  }
+  
+  .select-dogbreed {
     margin-bottom: 15px;
-}
-
-.sort-order {
+  }
+  
+  .sort-order {
     margin-top: 15px;
     margin-bottom: 15px;
-}
-
-
-
-/* -----------------buttons----------------- */
-
-.generate-button{
+  }
+  
+  /* -----------------buttons----------------- */
+  
+  .generate-button {
     margin-top: 15px;
-    margin-bottom:15px;
-}
-
-.favoriteButton{
+    margin-bottom: 15px;
+  }
+  
+  .favoriteButton {
     margin-top: 5px;
-    margin-left: 5px ;
-}
-
-/* ----------------- Page navigation  ----------------- */
-
+    margin-left: 5px;
+  }
+  
+  /* -----------------Page navigation----------------- */
+  
+  .pagination {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .pagination button {
+    margin: 0 5px;
+  }
+  

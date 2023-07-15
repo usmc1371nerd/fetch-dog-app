@@ -5,14 +5,25 @@ import HappyDogOwner from '../images/happy-owner-dog.jpg'
 
 const Home = () => {
   return (
-    <div className='home'>
+    
+    <div>
+    <div className="title"><h1>Welcome to Dog Match</h1></div>
 
-    <div className="intro">
-   
-    <h1 className='title'>
-    Welcome to dog match. Where we will help match you to your new addition to the family. First things first please navigate your way to the <Link to="/login">login</Link>  page!    </h1>
+    <div className="home">
+<div className="information-container">
 
-    </div>
+<h2>  Are you hunting for that perfect companion
+   that is always happy to see you anytime of day?  
+   No matter if you forgot to take the trash out.. 
+   No matter if you have if you was hangry and got 
+   a little snappy. Well will help you locate
+   that perfect companion here... 
+   </h2>
+
+</div>
+<Link to="/login"> <button className='login-button'>Login</button></Link> 
+</div>
+
 
 
 

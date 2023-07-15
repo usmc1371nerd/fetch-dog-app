@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import DogSelection from './dogselection.tsx';
-import './search.css'
+import './search.css';
 
 const DogSearch = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -15,8 +15,6 @@ const DogSearch = () => {
   const [favoriteDogs, setFavoriteDogs] = useState([]);
   const [matchDog, setMatchDog] = useState(null);
   const [sortOrder, setSortOrder] = useState('asc');
-
-
   const { email, name } = useParams();
 
   useEffect(() => {
@@ -54,6 +52,7 @@ const DogSearch = () => {
           const results = data.results;
           setSearchResults(results);
           console.log(results);
+          setFilteredResults(results);
         } else {
           console.log('Error fetching locations');
         }
@@ -127,7 +126,6 @@ const DogSearch = () => {
     setDisplayedResults(sortedResults);
   }, [sortOrder]);
 
-
   const handleLocationChange = (event) => {
     setSelectedLocation(event.target.value);
   };
@@ -141,13 +139,11 @@ const DogSearch = () => {
     return dogBreeds[randomIndex];
   };
 
-  const handleSearchSubmit = () => {
-    let selectedBreed = dogBreeds[0];
-    if (dogBreeds.length > 0) {
-      selectedBreed = generateRandomBreed();
-    }
+  const handleSearchSubmit = () => {  let selectedBreed = '';
+  if (dogBreeds.length > 0) {
+    selectedBreed = generateRandomBreed();
+  }
 
-    let selectedDog;
     if (!selectedLocation) {
       const randomDogs = [];
       for (let i = 0; i < 50; i++) {
@@ -155,37 +151,39 @@ const DogSearch = () => {
         const name = generateRandomName();
         const age = generateRandomAge();
         const location = filteredResults[Math.floor(Math.random() * filteredResults.length)].city;
-
+  
         const dogInfo = `Dog Breed: ${breed}`;
         const dogName = `Dog Name: ${name}`;
         const dogAge = `Dog Age: ${age}`;
         const dogLocation = `Location: ${location}`;
-
+  
         randomDogs.push([dogInfo, dogName, dogAge, dogLocation]);
       }
-
+  
       setDisplayedResults(randomDogs);
     } else {
       const randomName = generateRandomName();
       const randomAge = generateRandomAge();
-
-      selectedDog = {
+  
+      const selectedDog = {
         breed: selectedBreed,
         name: randomName,
         age: randomAge,
         location: selectedLocation,
       };
-
+  
       const dogInfo = `Dog Breed: ${selectedDog.breed}`;
       const dogName = `Dog Name: ${selectedDog.name}`;
       const dogAge = `Dog Age: ${selectedDog.age}`;
       const dogLocation = `Location: ${selectedDog.location}`;
-
-      setDisplayedResults([dogInfo, dogName, dogAge, dogLocation]);
+  
+      setDisplayedResults([[dogInfo, dogName, dogAge, dogLocation]]);
     }
     setFavoriteDogs([]);
     setMatchDog(null);
   };
+
+    
 
   const generateRandomName = () => {
     // Generate random names as per your requirement
@@ -218,9 +216,11 @@ const DogSearch = () => {
       setCurrentPage(currentPage + 1);
     }
   };
+
   const generateUniqueId = () => {
     return Math.random().toString(36).substr(2, 9);
   };
+
   const handleFavoriteDogToggle = (index) => {
     const dog = displayedResults[index];
     const updatedFavorites = [...favoriteDogs];
@@ -237,7 +237,6 @@ const DogSearch = () => {
     setFavoriteDogs(updatedFavorites);
   };
 
-  
   const handleGenerateMatch = () => {
     if (favoriteDogs.length > 0) {
       const randomIndex = Math.floor(Math.random() * favoriteDogs.length);
@@ -254,42 +253,38 @@ const DogSearch = () => {
   };
 
   return (
-    <div>
+    <div className='search'>
       <div className='select-location'>
-      <label  htmlFor="locationSelect">Select location:</label>
-      <select id="locationSelect" value={selectedLocation} onChange={handleLocationChange}>
-        <option value="">Please select a location</option>
-        {filteredResults.map((result, index) => (
-          <option key={index} value={result.city}>
-            {result.city}
-          </option>
-        ))}
-         
-      </select>
-  
+        <label htmlFor="locationSelect">Select location:</label>
+        <select id="locationSelect" value={selectedLocation} onChange={handleLocationChange}>
+          <option value="">Please select a location</option>
+          {filteredResults.map((result, index) => (
+            <option key={index} value={result.city}>
+              {result.city}
+            </option>
+          ))}
+        </select>
       </div>
-      <div>{selectedLocation}</div>
       
       <DogSelection onDogBreedsUpdate={handleDogBreedsUpdate} dogBreeds={dogBreeds} />
       <button className='match-submit' type="button" onClick={handleSearchSubmit}>Submit</button>
-
-
      
       <div className='sort-order'>
-      <label className='sort-order' htmlFor="sortOrderSelect">Sort Order:</label>
-      <select id="sortOrderSelect" value={sortOrder} onChange={handleSortOrderChange}>
-        <option value="asc">Ascending</option>
-        <option value="desc">Descending</option>
-      </select>
+        <label className='sort-order' htmlFor="sortOrderSelect">Sort Order:</label>
+        <select id="sortOrderSelect" value={sortOrder} onChange={handleSortOrderChange}>
+          <option value="asc">Ascending</option>
+          <option value="desc">Descending</option>
+        </select>
       </div>
+      
       <div className="displayedResults">
         {currentResults.map((result, index) => (
           <div key={index} className={`dogResult ${favoriteDogs.includes(result) ? 'favorite' : ''}`}>
-           <div className="dogInfo">{result[0]}</div>
-          <div className="dogName">{result[1]}</div>
-          <div className="dogLocation">{result[2]}</div>
-          <div className="dogAge">{result[3]}</div>
-            <button 
+            <div className="dogInfo">{result[0]}</div>
+            <div className="dogName">{result[1]}</div>
+            <div className="dogLocation">{result[2]}</div>
+            <div className="dogAge">{result[3]}</div>
+            <button
               type="button"
               onClick={() => handleFavoriteDogToggle(index)}
               className={`favoriteButton ${favoriteDogs.includes(result) ? 'active' : ''}`}
@@ -307,18 +302,17 @@ const DogSearch = () => {
       <div className="favorites">
       </div>
 
-{matchDog && (
-  <div className="matchDog">
-    <h3>Your Match!!</h3>
-    <div className="dogResult">
-      <div className="dogInfo">{matchDog[0]}</div>
-      <div className="dogName">{matchDog[1]}</div>
-      <div className="dogAge">{matchDog[2]}</div>
-      <div className="dogLocation">{matchDog[3]}</div>
-   
-    </div>
-  </div>
-)}
+      {matchDog && (
+        <div className="matchDog">
+          <h3>Your Match!!</h3>
+          <div className="dogResult">
+            <div className="dogInfo">{matchDog[0]}</div>
+            <div className="dogName">{matchDog[1]}</div>
+            <div className="dogAge">{matchDog[2]}</div>
+            <div className="dogLocation">{matchDog[3]}</div>
+          </div>
+        </div>
+      )}
  
       <div className='pagination'>
         <button type="button" onClick={handlePreviousPage} disabled={currentPage === 1}>
@@ -332,6 +326,5 @@ const DogSearch = () => {
     </div>
   );
 };
-
 
 export default DogSearch;

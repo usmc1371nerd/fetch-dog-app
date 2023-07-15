@@ -4,3 +4,40 @@
     width:25%;
 
 }
+
+.login-container{
+    height:100%;
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    margin-top: 15%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    border:1px solid black;
+    align-items:center;
+    width:fit-content;
+    padding:50px;
+    background-color: grey;
+    border-radius: 15px;
+    color:black;
+    
+}
+
+
+
+button  {
+    height:50px;
+    width:125px;
+    font-size: 19px;
+    border: 2px solid black;
+}
+
+.email-input  {
+    border:1px solid black;
+    margin-bottom: 15px;
+    
+    
+}

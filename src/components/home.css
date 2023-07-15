@@ -1,14 +1,44 @@
-
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+}
 
 .title {
     background-color: blue;
     border: 2px solid whitesmoke;
+    padding:5px ;
+    width: 100%;
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    margin-left:-6.5px;
+    margin-top: -7.5px;
+    
+   
+
+
+
+   
+
 }
 
-.home .title {
+.information-container {
+background-color: blue;
+border:2px solid whitesmoke;
+width: 25%;
+padding: 15px;
+color: whitesmoke;
+border-radius: 15px;
+opacity: 65%;
+margin-top: 50px;
+font-size: 25px;
 
- 
 }
+
+
+
 body {
     background-color: cornflowerblue;
     background-image:  url(../images/happy-owner-dog.jpg);
@@ -18,6 +48,21 @@ body {
    
 }
 
-img {
-    opacity: 50%;
+
+.login-button {
+    background-color: black;
+    width: fit-content;
+    padding: 5px;
+    color: white;
+    margin-top: 15px;
+   
+}
+
+.login-button:hover {
+    background-color: #ffbaee;
+    padding: 7.5px;
+    color: black;
+    width: 75px ;
+    cursor: grab;
+   
 }

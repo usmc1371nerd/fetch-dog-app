@@ -74,22 +74,29 @@ const Login = () => {
   }, []);
 
   return (
-
+    <div className='login-container'>
     <form onSubmit={handleLogin}>
+      <div className='email-input'>
       <input
         type="email"
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
+      </div>
+      <div className='email-input'>
       <input
         type="text"
         placeholder="Name"
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+      </div>
+      <div>
       <button type="submit">Login</button>
+      </div>
     </form>
+    </div>
   );
 };
 
