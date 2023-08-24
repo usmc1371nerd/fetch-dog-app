@@ -1,7 +1,7 @@
 
 Developer: James Dumas
-Developer Portfolio: https://jpsportfolio.com/
-GitHub:https://github.com/usmc1371nerd/fetch-dog-app
+Developer Portfolio: https://jpsportfolio.com/ <br>
+GitHub:https://github.com/usmc1371nerd/fetch-dog-app <br>
 website: https://fetch-dog-app.netlify.app/
 
 
