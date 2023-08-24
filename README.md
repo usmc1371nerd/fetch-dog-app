@@ -2,6 +2,7 @@
 Developer: James Dumas
 Developer Portfolio: https://jpsportfolio.com/
 GitHub:https://github.com/usmc1371nerd/fetch-dog-app
+website: https://fetch-dog-app.netlify.app/
 
 
 My experience with React is coming up on a year in just a few short months. I started my coding journey a little over a year ago. So if I don't understand something I read documentation and use ChatGpt to help with the more advanced features since I don't have team to help or someone more experienced.
